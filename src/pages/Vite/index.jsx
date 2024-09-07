@@ -1,10 +1,7 @@
+import { useState } from "@lib/hooks.js";
+
 const Vite = () => {
-  // TODO: useState 구현
-  let counter = 0;
-  const setCounter = () => {
-    counter++;
-    console.log(counter);
-  };
+  const [counter, setCounter] = useState(0);
 
   return (
     <div>
@@ -13,7 +10,11 @@ const Vite = () => {
       </a>
       <h1>Hello Vite!</h1>
       <div className="card">
-        <button id="counter" type="button" onClick={setCounter}>
+        <button
+          id="counter"
+          type="button"
+          onClick={() => setCounter((prev) => prev + 1)}
+        >
           count is {counter}
         </button>
       </div>
