@@ -1,8 +1,12 @@
-import { createElement } from "./createElement.js";
+import { updateElement } from "./updateElement.js";
 
 class VirtualDOM {
   constructor() {
     this.root = null;
+    this.VDOM = {
+      instance: null,
+      function: null,
+    };
   }
 
   createRoot(root) {
@@ -11,8 +15,12 @@ class VirtualDOM {
   }
 
   render(component) {
-    this.root.innerHTML = "";
-    this.root.appendChild(createElement(component));
+    if (component) {
+      this.VDOM.function = component;
+    }
+    const newVDOM = this.VDOM.function();
+    updateElement(this.root, this.VDOM.instance, newVDOM);
+    this.VDOM.instance = newVDOM;
   }
 }
 

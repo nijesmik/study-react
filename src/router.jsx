@@ -4,10 +4,10 @@ import JavaScript from "./pages/JavaScript/index.jsx";
 export const router = [
   {
     path: "/",
-    element: <Vite />,
+    element: Vite,
   },
   {
     path: "/js",
-    element: <JavaScript />,
+    element: JavaScript,
   },
 ];
