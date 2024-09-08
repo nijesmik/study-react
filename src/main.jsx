@@ -5,4 +5,4 @@ import { router } from "./router.jsx";
 
 virtualDOM
   .createRoot(document.getElementById("root"))
-  .render(<RouterProvider router={router} />);
+  .render(<RouterProvider routes={router} />);

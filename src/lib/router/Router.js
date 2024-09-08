@@ -1,26 +1,35 @@
-import { createElement } from "../dom/createElement.js";
+import { virtualDOM } from "../dom/VirtualDOM.js";
 
-export class Router {
-  constructor(root, routes) {
-    this.root = root;
-    this.routes = routes;
-    this.initialize();
-  }
-
-  initialize() {
-    this.loadRouteComponent(window.location.pathname);
-    this.customizeAnchorBehavior();
-
+class Router {
+  constructor() {
+    this.routes = null;
     window.addEventListener("popstate", () => {
-      this.loadRouteComponent(window.location.pathname);
+      virtualDOM.render(this.loadRoute());
     });
   }
 
-  loadRouteComponent(path) {
-    const { element } = this.routes.find((route) => route.path === path);
-    this.root.innerHTML = "";
-    this.root.appendChild(createElement(element));
+  setRoutes(routes) {
+    this.routes = routes;
+    return this;
   }
 
-  customizeAnchorBehavior() {}
+  loadRoute() {
+    const path = window.location.pathname;
+    const { element } = this.routes.find((route) => route.path === path);
+    return element;
+  }
+
+  navigate(path, options) {
+    this.updateHistory(path, options);
+    virtualDOM.render(this.loadRoute(path));
+  }
+
+  updateHistory(path, options) {
+    if (options && options.replace) {
+      return window.history.replaceState({}, "", path);
+    }
+    window.history.pushState({}, "", path);
+  }
 }
+
+export const $router = new Router();

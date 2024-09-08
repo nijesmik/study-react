@@ -1,7 +1,5 @@
-export const RouterProvider = ({ router }) => {
-  const { element } = router.find(
-    (route) => route.path === window.location.pathname,
-  );
+import { $router } from "./Router.js";
 
-  return element;
+export const RouterProvider = ({ routes }) => {
+  return $router.setRoutes(routes).loadRoute();
 };
