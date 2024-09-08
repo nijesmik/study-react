@@ -4,7 +4,7 @@ const Vite = () => {
   const [counter, setCounter] = useState(0);
 
   return (
-    <div>
+    <>
       <a href="https://vitejs.dev" target="_blank">
         <img src="/vite.svg" className="logo" alt="Vite logo" />
       </a>
@@ -19,7 +19,7 @@ const Vite = () => {
         </button>
       </div>
       <p className="read-the-docs">Click on the Vite logo to learn more</p>
-    </div>
+    </>
   );
 };
 

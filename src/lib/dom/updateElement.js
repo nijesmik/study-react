@@ -29,12 +29,13 @@ export const updateElement = (parent, currentVNode, newVNode, index = 0) => {
   updateAttributes(node, newVNode.props ?? {}, currentVNode.props ?? {});
 
   // 6. newNode와 currentNode의 모든 자식 태그를 순회하며 1 ~ 5의 내용을 반복한다.
-  const maxLength = Math.max(
-    newVNode.children.length,
-    currentVNode.children.length,
-  );
+  updateElements(node, currentVNode.children, newVNode.children);
+};
+
+export const updateElements = (parent, currentVNodes, newVNodes) => {
+  const maxLength = Math.max(currentVNodes.length, newVNodes.length);
   for (let i = 0; i < maxLength; i++) {
-    updateElement(node, currentVNode.children[i], newVNode.children[i], i);
+    updateElement(parent, currentVNodes[i], newVNodes[i], i);
   }
 };
 

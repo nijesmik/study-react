@@ -1,10 +1,10 @@
-import { updateElement } from "./updateElement.js";
+import { updateElements } from "./updateElement.js";
 
 class VirtualDOM {
   constructor() {
     this.root = null;
     this.VDOM = {
-      instance: null,
+      instance: [],
       function: null,
     };
     this.states = {
@@ -18,14 +18,18 @@ class VirtualDOM {
     return this;
   }
 
+  createDOM() {
+    const newVDOM = this.VDOM.function();
+    this.states.count = 0;
+    return newVDOM.length ? newVDOM : [newVDOM];
+  }
+
   render(component) {
     if (component) {
       this.VDOM.function = component;
     }
-    const newVDOM = this.VDOM.function();
-    this.states.count = 0;
-
-    updateElement(this.root, this.VDOM.instance, newVDOM);
+    const newVDOM = this.createDOM();
+    updateElements(this.root, this.VDOM.instance, newVDOM);
     this.VDOM.instance = newVDOM;
   }
 

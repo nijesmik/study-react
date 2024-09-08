@@ -10,7 +10,9 @@ export const createElement = (node) => {
   }
 
   // node.type 기반으로 실제 dom에 element생성
-  const element = document.createElement(node.type);
+  const element = node.type
+    ? document.createElement(node.type)
+    : document.createDocumentFragment();
 
   // 정의한 속성을 삽입
   Object.entries(node.props || {})
