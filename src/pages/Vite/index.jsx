@@ -1,7 +1,9 @@
 import { useState } from "@lib/hooks.js";
+import { useNavigate } from "@lib/router/hooks.js";
 
 const Vite = () => {
   const [counter, setCounter] = useState(0);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -10,6 +12,9 @@ const Vite = () => {
       </a>
       <h1>Hello Vite!</h1>
       <div className="card">
+        <button onClick={() => navigate("/js", { replace: true })}>
+          JavaScript
+        </button>
         <button
           id="counter"
           type="button"
