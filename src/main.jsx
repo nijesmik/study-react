@@ -1,8 +1,8 @@
 import "./styles/global.css";
 import { virtualDOM } from "./lib/dom/VirtualDOM.js";
 import { RouterProvider } from "./lib/router/RouterProvider.js";
-import { router } from "./router.jsx";
+import { routes } from "./routes.jsx";
 
 virtualDOM
   .createRoot(document.getElementById("root"))
-  .render(<RouterProvider routes={router} />);
+  .render(<RouterProvider routes={routes} />);
