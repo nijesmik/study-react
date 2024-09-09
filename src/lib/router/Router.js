@@ -21,7 +21,7 @@ class Router {
 
   navigate(path, options) {
     this.updateHistory(path, options);
-    virtualDOM.render(this.loadRoute(path));
+    virtualDOM.render(this.loadRoute());
   }
 
   updateHistory(path, options) {
