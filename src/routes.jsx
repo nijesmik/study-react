@@ -4,10 +4,15 @@ import JavaScript from "./pages/JavaScript/index.jsx";
 export const routes = [
   {
     path: "/",
-    element: Vite,
-  },
-  {
-    path: "/js",
-    element: JavaScript,
+    children: [
+      {
+        index: true,
+        element: Vite,
+      },
+      {
+        path: "js",
+        element: JavaScript,
+      },
+    ],
   },
 ];
