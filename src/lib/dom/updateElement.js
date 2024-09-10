@@ -14,16 +14,12 @@ export const updateElement = (parent, prevVNode, newVNode, index = 0) => {
   }
 
   // 3. prevNode와 newNode 모두 text 타입일 경우
-  const node = parent.childNodes[index];
   if (isTextNode(prevVNode) && isTextNode(newVNode)) {
-    if (prevVNode === newVNode) {
-      return;
-    }
-    parent.replaceChild(createElement(newVNode), node);
-    return;
+    return updateTextElement(parent, prevVNode, newVNode, index);
   }
 
   // 4. prevNode와 newNode의 태그 이름(type)이 다를 경우
+  const node = parent.childNodes[index];
   if (prevVNode.type !== newVNode.type) {
     parent.replaceChild(createElement(newVNode), node);
     return;
@@ -43,6 +39,14 @@ const deleteElement = (parent, currentVNodes, index) => {
   const node = parent.childNodes[index];
   parent.removeChild(node);
   return index;
+};
+
+export const updateTextElement = (parent, prevVNode, newVNode, index) => {
+  if (prevVNode === newVNode) {
+    return;
+  }
+  const node = parent.childNodes[index];
+  parent.replaceChild(createElement(newVNode), node);
 };
 
 export const updateElements = (parent, currentVNodes, newVNodes) => {
