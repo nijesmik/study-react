@@ -4,6 +4,7 @@ class Router {
   constructor() {
     this.routes = null;
     this.path = null;
+    this.loaderData = null;
     window.addEventListener("popstate", () => {
       virtualDOM.render(this.loadRoute());
     });
@@ -16,8 +17,14 @@ class Router {
 
   loadRoute() {
     this.path = window.location.pathname;
-    const { element } = this.matchRoute(this.routes);
-    return element;
+    const { element, loader } = this.matchRoute(this.routes);
+    if (loader && typeof loader === "function") {
+      return loader().then((data) => {
+        this.loaderData = data;
+        return element;
+      });
+    }
+    return Promise.resolve(element);
   }
 
   matchRoute($routes, parentPath = "/") {
