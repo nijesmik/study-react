@@ -1,10 +1,10 @@
-import { createElement } from "./createElement.js";
+import { createDomFromVNode } from "./createDomFromVNode.js";
 import { updateAttributes } from "./attribute.js";
 
 export const updateElement = (parent, prevVNode, newVNode, index = 0) => {
   // 1. newNode만 있는 경우 -> node 추가
   if (!isExist(prevVNode) && isExist(newVNode)) {
-    parent.appendChild(createElement(newVNode));
+    parent.appendChild(createDomFromVNode(newVNode));
     return;
   }
 
@@ -21,7 +21,7 @@ export const updateElement = (parent, prevVNode, newVNode, index = 0) => {
   // 4. prevNode와 newNode의 태그 이름(type)이 다를 경우
   const node = parent.childNodes[index];
   if (prevVNode.type !== newVNode.type) {
-    parent.replaceChild(createElement(newVNode), node);
+    parent.replaceChild(createDomFromVNode(newVNode), node);
     return;
   }
 
@@ -46,7 +46,7 @@ export const updateTextElement = (parent, prevVNode, newVNode, index) => {
     return;
   }
   const node = parent.childNodes[index];
-  parent.replaceChild(createElement(newVNode), node);
+  parent.replaceChild(createDomFromVNode(newVNode), node);
 };
 
 export const updateElements = (parent, currentVNodes, newVNodes) => {
