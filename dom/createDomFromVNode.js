@@ -24,7 +24,7 @@ export const createDomFromVNode = (VNode) => {
     });
 
   // 자식노드가 있는 경우 재귀호출
-  VNode.children.forEach((child) =>
+  VNode.props.children.forEach((child) =>
     element.appendChild(createDomFromVNode(child)),
   );
 

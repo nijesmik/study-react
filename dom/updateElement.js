@@ -29,7 +29,7 @@ export const updateElement = (parent, prevVNode, newVNode, index = 0) => {
   updateAttributes(node, newVNode.props ?? {}, prevVNode.props ?? {});
 
   // 6. newNode와 prevNode의 모든 자식 태그를 순회하며 1 ~ 5의 내용을 반복한다.
-  updateElements(node, prevVNode.children, newVNode.children);
+  updateElements(node, prevVNode.props.children, newVNode.props.children);
 };
 
 const deleteElement = (parent, prevVNode, index) => {

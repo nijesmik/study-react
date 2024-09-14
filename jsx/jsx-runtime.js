@@ -1,26 +1,17 @@
 export const jsx = (type, props, ...children) => {
+  return createElement(type, props, children);
+};
+
+const createElement = (type, props, children) => {
   if (typeof type === "function") {
     return type({ ...props, children });
   }
 
   return {
     type,
-    props,
-    children: children.flat(),
+    props: { ...props, children },
   };
 };
-
-// export const jsx = (type, { ...props, children }) => {
-//   if (typeof type === 'function') {
-//     return type({ ...props, children });
-//   }
-//
-//   return {
-//     type,
-//     props,
-//     children: [children].flat(),
-//   };
-// };
 
 export const jsxs = jsx;
 
