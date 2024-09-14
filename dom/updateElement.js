@@ -1,5 +1,5 @@
 import { createDomFromVNode } from "./createDomFromVNode.js";
-import { updateAttributes } from "./attribute.js";
+import { updateProperties } from "./props.js";
 
 export const updateElement = (parent, prevVNode, newVNode, index = 0) => {
   // 1. newNode만 있는 경우 -> node 추가
@@ -26,7 +26,7 @@ export const updateElement = (parent, prevVNode, newVNode, index = 0) => {
   }
 
   // 5. prevNode와 newNode의 태그 이름(type)이 같을 경우
-  updateAttributes(node, newVNode.props ?? {}, prevVNode.props ?? {});
+  updateProperties(node, newVNode.props ?? {}, prevVNode.props ?? {});
 
   // 6. newNode와 prevNode의 모든 자식 태그를 순회하며 1 ~ 5의 내용을 반복한다.
   updateElements(node, prevVNode.props.children, newVNode.props.children);

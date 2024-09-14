@@ -1,4 +1,4 @@
-import { setAttribute } from "./attribute.js";
+import { setInitialProperties } from "./props.js";
 
 export const createDomFromVNode = (VNode) => {
   // null이나 undefined의 경우 fragment 생성
@@ -17,11 +17,7 @@ export const createDomFromVNode = (VNode) => {
     : document.createDocumentFragment();
 
   // 정의한 속성을 삽입
-  Object.entries(VNode.props || {})
-    .filter(([attr, value]) => value)
-    .forEach(([attr, value]) => {
-      setAttribute(element, attr, value);
-    });
+  setInitialProperties(element, VNode.props ?? {});
 
   // 자식노드가 있는 경우 재귀호출
   VNode.props.children.forEach((child) =>
