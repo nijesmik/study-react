@@ -21,7 +21,11 @@ export const updateElement = (parent, prevVNode, newVNode, index = 0) => {
   // 4. prevNode와 newNode의 태그 이름(type)이 다를 경우
   const node = parent.childNodes[index];
   if (prevVNode.type !== newVNode.type) {
-    parent.replaceChild(createElement(newVNode), node);
+    if (node) {
+      parent.replaceChild(createElement(newVNode), node);
+      return;
+    }
+    parent.appendChild(createElement(newVNode));
     return;
   }
 
@@ -32,7 +36,7 @@ export const updateElement = (parent, prevVNode, newVNode, index = 0) => {
   updateElements(node, prevVNode.children, newVNode.children);
 };
 
-const deleteElement = (parent, currentVNodes, index) => {
+const deleteElement = (parent, prevVNode, index) => {
   if (!isExist(prevVNode)) {
     return;
   }
@@ -49,11 +53,11 @@ export const updateTextElement = (parent, prevVNode, newVNode, index) => {
   parent.replaceChild(createElement(newVNode), node);
 };
 
-export const updateElements = (parent, currentVNodes, newVNodes) => {
-  const maxLength = Math.max(currentVNodes.length, newVNodes.length);
+export const updateElements = (parent, prevVNodes, newVNodes) => {
+  const maxLength = Math.max(prevVNodes?.length, newVNodes?.length);
   let index = undefined;
   for (let i = 0; i < maxLength; i++) {
-    index = updateElement(parent, currentVNodes[i], newVNodes[i], index ?? i);
+    index = updateElement(parent, prevVNodes[i], newVNodes[i], index ?? i);
   }
 };
 
