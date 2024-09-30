@@ -29,11 +29,12 @@ export const setAttribute = (element, attr, value) => {
 };
 
 const convertAttribute = (attribute) => {
-  if (attribute === "className") {
-    return "class";
+  switch (attribute) {
+    case "className":
+      return "class";
+    case "htmlFor":
+      return "for";
+    default:
+      return attribute;
   }
-  if (attribute === "htmlFor") {
-    return "for";
-  }
-  return attribute;
 };
