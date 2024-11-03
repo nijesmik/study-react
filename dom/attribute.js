@@ -5,7 +5,7 @@ export const updateAttributes = (target, newProps, oldProps) => {
       return target.removeEventListener(event, value);
     }
     if (newProps[attr] === undefined) {
-      target.removeAttribute(attr);
+      target.removeAttribute(convertAttribute(attr));
     }
   });
 
