@@ -26,7 +26,7 @@ class Router {
     );
     this.params = params;
     if (loader && typeof loader === "function") {
-      return loader()
+      return loader({ params })
         .then((data) => {
           this.loaderData = data;
           return element;
