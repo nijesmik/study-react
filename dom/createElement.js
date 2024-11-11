@@ -1,4 +1,4 @@
-import { setAttribute } from "./attribute.js";
+import { setInitialProperties } from "./bindings/client/DOMComponent.js";
 
 export const createElement = (node) => {
   // null이나 undefined의 경우 fragment 생성
@@ -17,11 +17,7 @@ export const createElement = (node) => {
     : document.createDocumentFragment();
 
   // 정의한 속성을 삽입
-  Object.entries(node.props || {})
-    .filter(([attr, value]) => value)
-    .forEach(([attr, value]) => {
-      setAttribute(element, attr, value);
-    });
+  setInitialProperties(element, node.type, node.props || {});
 
   // 자식노드가 있는 경우 재귀호출
   node.children?.forEach((child) => element.appendChild(createElement(child)));
