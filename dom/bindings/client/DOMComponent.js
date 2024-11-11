@@ -103,27 +103,46 @@ const updateInputProperties = (domElement, lastProps, nextProps) => {
       (nextProp != null || lastProp != null)
     ) {
       switch (propKey) {
-        case "type":
-          return (type = nextProp);
-        case "name":
-          return (name = nextProp);
-        case "checked":
-          return (checked = nextProp);
-        case "defaultChecked":
-          return (defaultChecked = nextProp);
-        case "value":
-          return (value = nextProp);
-        case "defaultValue":
-          return (defaultValue = nextProp);
+        case "type": {
+          type = nextProp;
+          break;
+        }
+        case "name": {
+          name = nextProp;
+          break;
+        }
+        case "checked": {
+          checked = nextProp;
+          break;
+        }
+        case "defaultChecked": {
+          defaultChecked = nextProp;
+          break;
+        }
+        case "value": {
+          value = nextProp;
+          break;
+        }
+        case "defaultValue": {
+          defaultValue = nextProp;
+          break;
+        }
         default: {
           if (nextProp !== lastProp)
-            setProp(domElement, tag, propKey, nextProp, nextProps, lastProp);
+            setProp(
+              domElement,
+              "input",
+              propKey,
+              nextProp,
+              nextProps,
+              lastProp,
+            );
         }
       }
     }
   }
   updateInput({
-    domElement,
+    element: domElement,
     value,
     defaultValue,
     lastDefaultValue,
@@ -167,18 +186,30 @@ const setInitialInputProperties = (domElement, props) => {
       continue;
     }
     switch (propKey) {
-      case "name":
-        return (name = propValue);
-      case "type":
-        return (type = propValue);
-      case "checked":
-        return (checked = propValue);
-      case "defaultChecked":
-        return (defaultChecked = propValue);
-      case "value":
-        return (value = propValue);
-      case "defaultValue":
-        return (defaultValue = propValue);
+      case "name": {
+        name = propValue;
+        break;
+      }
+      case "type": {
+        type = propValue;
+        break;
+      }
+      case "checked": {
+        checked = propValue;
+        break;
+      }
+      case "defaultChecked": {
+        defaultChecked = propValue;
+        break;
+      }
+      case "value": {
+        value = propValue;
+        break;
+      }
+      case "defaultValue": {
+        defaultValue = propValue;
+        break;
+      }
       default: {
         setProp(domElement, "input", propKey, propValue, props, null);
       }
@@ -186,7 +217,7 @@ const setInitialInputProperties = (domElement, props) => {
   }
 
   initInput({
-    domElement,
+    element: domElement,
     value,
     defaultValue,
     checked,
