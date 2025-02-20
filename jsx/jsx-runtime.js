@@ -1,26 +1,21 @@
-export const jsx = (type, props, ...children) => {
+import { Element } from "./element.js";
+import { toArray } from "./children";
+
+// for vite
+export const h = (type, props, ...children) =>
+  jsx(type, { ...props, children });
+
+// for babel
+export const jsx = (type, props) => {
   if (typeof type === "function") {
-    return type({ ...props, children });
+    return type(props);
   }
 
-  return {
-    type,
-    props,
-    children: children.flat(2).filter((child) => child),
-  };
-};
+  const children = toArray(props.children);
+  delete props.children;
 
-// export const jsx = (type, { ...props, children }) => {
-//   if (typeof type === 'function') {
-//     return type({ ...props, children });
-//   }
-//
-//   return {
-//     type,
-//     props,
-//     children: [children].flat(),
-//   };
-// };
+  return Element(type, props, children);
+};
 
 export const jsxs = jsx;
 
